@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Design海报展示</title>
+<link rel="stylesheet" href="statics/web/css/reset.css" />
+<link rel="stylesheet" href="statics/web/css/global.css" />
+<link rel="stylesheet" href="statics/web/css/menu.css"/>
+<link rel="stylesheet" href="statics/web/css/design.css" />
+<script type="text/javascript" src="statics/web/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="statics/web/js/byby.js"></script>
+</head>
+<body >
+
+<div id="main" >
+
+<div id="content">
+<div id="left_content">
+		<div id="top_content">
+			<div id="address">
+				<a id="shanghai" href="#" ><img src="statics/web/images/store_store_main/title1.png" alt="placeholder" /></a>
+			    <a id="lidu" href="#"     ><img src="statics/web/images/store_store_main/title2.png" alt="placeholder" /></a>
+			    <a id="gongti" href="#"   ><img src="statics/web/images/store_store_main/title3.png" alt="placeholder" /></a>
+			 </div>
+	    </div>
+
+		<div id="real_content">
+
+			<ul>
+			{load_data assign="list" table="Design_Design" where="" limit=4}
+			<li>
+			<div id="imgframe1">
+			<div class="imgframeInner">
+			<a href="?item=designdetail&theindex={$list[0].id}"><img class="line" src="upload/{$list[0].theimage}"/></a>
+			</div>
+			</div>
+			<span>{$list[0].description}</span>
+			</li>
+			<li>
+			<div id="imgframe2">
+			<div class="imgframeInner">
+			<a href="?item=designdetail&theindex={$list[1].id}"><img class="line" src="upload/{$list[1].theimage}"/></a>
+			</div>
+			</div>
+			<span>{$list[1].description}</span>
+			</li>
+			<li>
+			<div id="imgframe3">
+			<div class="imgframeInner">
+			<a href="?item=designdetail&theindex={$list[2].id}"><img class="line" src="upload/{$list[2].theimage}"/></a>
+			</div>
+			</div>
+			<span>{$list[2].description}</span>
+			</li>
+			<li>
+			<div id="imgframe4">
+			<div class="imgframeInner">
+			<a href="?item=designdetail&theindex={$list[3].id}"><img class="line" src="upload/{$list[3].theimage}"/></a>
+			</div>
+			</div>
+			<span>{$list[3].description}</span>
+			</li>
+
+
+			</ul>
+
+
+		</div>
+	</div>
+	{include file="menu.html"}
+
+</div>
+
+</div>
+
+<div id="bottom"><div id="bottomwrapper"> <div id="designlink" ></div></div> </div> 
+<body>
+</html>
+

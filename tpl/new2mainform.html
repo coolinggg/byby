@@ -1,0 +1,168 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+
+<title>不言不语后台管理</title>
+<link href="statics/css/new_adminmvm.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="statics/new/jquery-1.4-and-jquery-ui-core-1.7.2.js"></script>
+
+
+<script type="text/javascript" src="statics/My97DatePicker/WdatePicker.js"></script>
+<style>
+body,div{ margin:0; padding:0;}
+
+.top_left{ float:left; width:150px;height:65px;  _margin-right:-3px;}
+.top_center{ margin:0 0 0 150px; _margin:0 0 0 147px; height:62px;border-bottom:3px solid #888888;}
+.bottom_left{ float:left; width:150px; _margin-right:-3px;}
+.bottom_center{ margin:0 0 0 150px; _margin:0 0 0 147px;padding:10px;}
+
+</style>
+
+<style charset="utf-8" type="text/css">
+label input{
+    display: inline-block;
+}
+#addform input,#addform input[type="file"]{
+float:left;
+font-size:12px;
+
+border:solid 1px #ccc;
+width:300px;
+ margin-top: 9px;
+height: 24px;
+} 
+
+#addform input[type="reset"]
+{
+	width:30px;
+}
+</style>
+
+
+<script type="text/javascript">  
+    function checkAll() {  
+        var m = document.getElementsByName("chkall")[0];  
+        var s = document.getElementsByName("check");  
+  
+        if (m.checked) {  
+  
+            for ( var i = 0; i < s.length; i++) {  
+                s[i].checked = true;  
+            }  
+        } else {  
+            for ( var i = 0; i < s.length; i++) {  
+                s[i].checked = false;  
+            }  
+  
+        }  
+    }  
+      function test() {  
+          var s = document.getElementsByName("check");
+        var msg="select value is :" ;
+            for ( var i = 0; i < s.length; i++) {  
+                if( s[i].checked)
+                { 
+                    msg += s[ i ].value;
+                }
+            }
+            alert( msg );
+ 
+        }  
+    </script>
+	
+<script type="text/javascript">
+$(function(){
+
+$("#delall").click(function(e){
+if(confirm("确认全部删除？"))
+{
+	test();
+}
+});
+});
+</script>
+
+
+
+<script type="text/javascript" src="statics/js/ajaxfileupload2.js"></script>
+
+    <script type="text/javascript">
+        function UploadFile( target)    
+        {
+//alert("---");
+ $.ajaxFileUpload({
+        url:'framework/lib/util/doajaxfileupload.php?fileid='+target.name,
+        secureuri:false,
+        fileElementId:'' + target.name,
+        dataType: 'json',
+        success: function (data, status) {
+            if(typeof(data.error) != 'undefined')
+            {
+                if(data.error != '')
+                {
+                    alert(data.error);
+                }else{
+                    var msg= '成功上传文件：' + data.msg;
+                    $("#" + target.name.substr(0,target.name.length-10)).val(data.newfile);
+                    $("#" + target.name.substr(0,target.name.length-10) + "_img").attr("src", "upload/" + data.newfile);
+                    $("#" + target.name.substr(0,target.name.length-10) + "_img").show();
+                    //$("#imgFile").hide();
+                    alert(msg);
+                }
+            }
+        },
+        error: function (data, status, e)
+        {
+            alert(e);
+        }
+    });
+}
+        </script>
+</head>
+<body>
+<div class="top_left">
+<div class="span2" id="headerleft" style="float:left;padding-top:0px;">
+<h1><img style="width:150px;height:65px;margin-left:0px;" src="statics/new/images/logo.bmp"></h1>
+</div>
+</div>
+
+<div class="top_center" >
+<div id="titlemsg" style="padding-top:10px;padding-right:10px;text-align:right;height:20px;">
+当日总额:<span>￥35000.00</span>| 当日结算额:<span>￥35000.00</span>| 当日订单:<span>2</span>张定单 | 当日结单:<span>2</span>张定单 &nbsp;<a target="_parent" href="logging.php?action=logout">[退出]</a>
+<a target="_blank" href=".">[打开主页]</a>
+</div>
+
+<div id="header_menu" style="margin-top:5px">
+<ul style="margin:0 0 0px 10px">
+{foreach from=$categry key=k item=v}
+<li>
+<span><a href="?module=admin&action=subadmin&tableid={$things[$v][0].id}&currcat={$v}" onclick="sethighlight(0); togglemenu('1'); return false;">{$v}</a></span> 
+</li>
+{/foreach}
+</ul>    
+</div>
+</div>
+
+<div class="bottom_left">
+<div id="left" style="padding-top:10px;" id="17">
+	 
+		<dl>
+			<dt>{$currcat}</dt>
+			        {foreach from=$things[$currcat]  item=thething}
+					<dd><a href="?module=admin&action=subadmin&tableid={$thething.id}&currcat={$currcat}">{$thething.thethings}</a></dd>
+					{/foreach}
+	     </dl>
+		</div>
+</div>
+<div class="bottom_center" >
+<div style="margin-bottom:5px;font-weight:bold;border:1px solid #888888;margin-right:0px;padding:0px;background:none repeat scroll 0 0 #1A94C9">
+	<span style="padding-left:10px;line-height:22px;background:none repeat scroll 0 0 #1A94C9;color:#ffffff">
+	当前位置：{$level1}/{$level2}{if $level3}/{$level3}{/if}
+	</span>
+	<span> </span>
+	</div>
+	{$testtable}
+
+</div>
+</body>
+</html>

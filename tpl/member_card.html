@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Member's Card会员卡</title>
+<link rel="stylesheet" href="statics/web/css/reset.css" />
+<link rel="stylesheet" href="statics/web/css/global.css" />
+<link rel="stylesheet" href="statics/web/css/menu.css"/>
+<link rel="stylesheet" href="statics/web/css/card.css" />
+<script type="text/javascript" src="statics/web/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="statics/web/js/byby.js"></script>
+
+</head>
+<body >
+<div id="main" >
+
+<div id="content">
+		<div id="left_content">
+			<div id="real_content">
+			<span id="article">
+    {load_data assign="list" table="Member_Card" where="" limit=1}
+
+        {foreach from=$list item=rec}
+        {$rec.content}
+        {/foreach}
+			
+			</span>
+			</div>
+		</div>
+		
+	{include file="menu.html"}
+	
+</div>
+</div>
+
+<div id="bottom"><div id="bottomwrapper"> <div id="designlink" ></div></div> </div> 
+<body>
+</html>
+

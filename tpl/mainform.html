@@ -1,0 +1,179 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+
+<title>不言不语后台管理</title>
+<meta content="14700367776333526375" property="qc:admins">
+<meta content="" name="description">
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible">
+<link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="statics/css/new_adminmvm.css" type="text/css" rel="stylesheet">
+<link href="statics/css/new_corly.css" rel="stylesheet">
+<script language="javascript" src="statics/js/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" media="all" href="statics/css/calendar.css" />
+<script type="text/javascript" src="statics/js/calendar.js"></script>
+<script type="text/javascript" src="statics/js/lang.js"></script>
+<script type="text/javascript" src="statics/js/date.js"></script>
+
+<style charset="utf-8" type="text/css">
+label input{
+    display: inline-block;
+}
+#addform input,#addform input[type="file"]{
+float:left;
+font-size:12px;
+
+border:solid 1px #ccc;
+width:300px;
+ margin-top: 9px;
+height: 24px;
+} 
+</style>
+
+
+<script type="text/javascript">  
+    function checkAll() {  
+        var m = document.getElementsByName("chkall")[0];  
+        var s = document.getElementsByName("check");  
+  
+        if (m.checked) {  
+  
+            for ( var i = 0; i < s.length; i++) {  
+                s[i].checked = true;  
+            }  
+        } else {  
+            for ( var i = 0; i < s.length; i++) {  
+                s[i].checked = false;  
+            }  
+  
+        }  
+    }  
+      function test() {  
+          var s = document.getElementsByName("check");
+        var msg="select value is :" ;
+            for ( var i = 0; i < s.length; i++) {  
+                if( s[i].checked)
+                { 
+                    msg += s[ i ].value;
+                }
+            }
+            alert( msg );
+ 
+        }  
+    </script>
+	
+<script type="text/javascript">
+$(function(){
+
+$("#delall").click(function(e){
+if(confirm("确认全部删除？"))
+{
+	test();
+}
+});
+});
+</script>
+
+
+<script type="text/javascript" src="statics/new/jquery-1.4-and-jquery-ui-core-1.7.2.js"></script>
+
+<script type="text/javascript" src="statics/js/ajaxfileupload2.js"></script>
+
+    <script type="text/javascript">
+        function UploadFile( target)    
+        {
+//alert("---");
+ $.ajaxFileUpload({
+        url:'framework/lib/util/doajaxfileupload.php?fileid='+target.name,
+        secureuri:false,
+        fileElementId:'' + target.name,
+        dataType: 'json',
+        success: function (data, status) {
+            if(typeof(data.error) != 'undefined')
+            {
+                if(data.error != '')
+                {
+                    alert(data.error);
+                }else{
+                    var msg= '成功上传文件：' + data.msg;
+                    $("#" + target.name.substr(0,target.name.length-10)).val(data.newfile);
+                    $("#" + target.name.substr(0,target.name.length-10) + "_img").attr("src", "upload/" + data.newfile);
+                    $("#" + target.name.substr(0,target.name.length-10) + "_img").show();
+                    //$("#imgFile").hide();
+                    alert(msg);
+                }
+            }
+        },
+        error: function (data, status, e)
+        {
+            alert(e);
+        }
+    });
+}
+        </script>
+</head>
+<body style="background-color:#fff;">
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="brand"  href="?module=admin">
+不言不语
+</a>
+<div class="nav-collapse">
+
+<ul class="nav nav-main">
+{foreach from=$categry key=k item=v}
+<li>
+
+</li>
+{/foreach}
+
+</ul>
+<ul class="nav pull-right">
+<li>
+<a href="/login">当前用户:admin</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="row" style="margin:auto;width:auto;">
+<div class="span2" style="background-color:#ffffff; margin-left:30px">
+&nbsp;
+</div>
+<div class="span12" style="background-color:#ffffff;margin-top:-15px;" >
+    <ul class="breadcrumb pull-left" style="margin-left:10px;">
+    <li>{$level1} <span class="divider">/</span></li>
+    <li >{$level2}</li>
+	{if $level3}
+	<span class="divider">/</span></li>
+	<li >{$level3}</li>
+	{/if}
+    </ul>
+<div style="clear:both"></div>
+<div class="content" style="background-color:#ffffff;margin-top:-3px;">
+
+<div id="right">
+
+{$testtable}
+</div>
+
+</div>
+
+<div class="line"></div>
+<footer>2012-2013 heyaner.com</footer>
+
+</div>
+</div>
+</div>
+<div class="container">
+
+</div>
+</body>
+</html>
+

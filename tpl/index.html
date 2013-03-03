@@ -1,0 +1,109 @@
+﻿<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<title>欢迎来到布言布语</title>
+		
+<link rel="stylesheet" type="text/css" media="all" href="statics/web/js/zara.css">
+<link rel="stylesheet" type="text/css" media="all" href="statics/web/js/styles-carousel-v.css">
+<style type="text/css">
+#circle{
+	width: 400px;height: 134px;background:url(statics/web/images/logo.png);
+	_background: transparent;
+	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='statics/web/images/logo.png', sizingMethod='scale');
+	position: absolute;left: 50%;top: 50%;margin-left: -200px;margin-top: -67px;
+}
+#circlelink{ position: absolute;left: 50%;top: 50%;width: 400px;height: 134px;margin-left: -200px;margin-top: -67px;text-indent: -1000px;overflow: hidden }
+</style>
+<script type="text/javascript">
+	var zara = zara || { };
+	zara.globals = { };
+	zara.extensions = [];
+	var cFns = new Array();
+	
+	cFns.unshift(function() {
+		var body = $(document.body);
+		var html = $$('html')[0];
+		body.setStyle('height', '100%');
+		html.setStyle('height', '100%');
+	});
+	cFns.unshift(function() {
+	zara.core.context.globals.staticContent = 'upload/';
+	
+	{load_data assign="list" table="front_page" where="" limit=10}
+	var myimgs={};
+	var myimgsIndex =0;
+	{foreach from=$list item=rec}
+	myimgs[myimgsIndex] = '{$rec.theimages}';
+	myimgsIndex++;
+	{/foreach}
+	
+	zara.core.context.globals.imgfile = myimgs;
+	
+	Asset.javascript('statics/web/js/script-carousel-v.js');
+	configureWhiteMenu();
+});
+</script>
+<script type="text/javascript" src="statics/web/js/script-carousel-v.js"></script>
+</head>
+   
+
+	
+<body style="height: 100%;" class="designPage homePage onlyNavWhite">
+
+<div class="fullScreen carouselBottom speed" id="carousel" style="opacity: 1; height: 191px; visibility: visible;">
+
+</div>
+
+	<div style="height: 191px;" class="fullScreen mktSpotCont" id="homeBackground"></div>
+	<div style="height: 191px;" class="fullScreen mktSpotCont" id="homePromos">
+		<!-- Please - Do not remove this comment.  -->
+	</div>
+<script type="text/javascript" src="statics/web/js/zaralib-comp-1350929861162.js"></script>
+<script type="text/javascript">
+try {
+	var versionNumber = '1350929861162';
+	var debugLevel = 0; // 0 -> Desactivado; 1 -> Errores; 2 -> Advertencias; 3 -> Mensajes; 4 -> Logs
+	zara.core.init(versionNumber, debugLevel, {
+		globals: {
+			storeId: '11716'
+		}
+	});
+} catch(e) {
+	if(window.console) {
+		console.log("Error al inicializar el core JS de la aplicacion: " + e);
+		console.log(e);
+	}
+}
+
+try {
+
+	var t2 = new Date();
+	var i = 0;
+
+	for(i = 0; i < cFns.length; i++) {
+		try {
+			cFns[i].run();
+		} catch(e) {
+			Log.log("ItxCommonJS# Ha sucedido un error con un codigo de la pagina (ms): " + e.message);
+			Log.log(e);
+		}
+	}
+	Log.log("ItxCommonJS# Tiempo en recorrer los cFns: " + (new Date().getTime() - t2.getTime()));
+
+} finally {
+	var locker = moo('locker');
+	if(locker) {
+		locker.destroy();
+	}
+}
+
+
+</script> 
+
+<div id="circle"></div>
+<a id="circlelink" href="?item=store_onlineshop">商城</a>
+
+
+
+</body>	
+</html>

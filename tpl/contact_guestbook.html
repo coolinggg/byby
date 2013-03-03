@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Guestbook留言簿</title>
+<link rel="stylesheet" href="statics/web/css/reset.css" />
+<link rel="stylesheet" href="statics/web/css/global.css" />
+<link rel="stylesheet" href="statics/web/css/menu.css"/>
+<link rel="stylesheet" href="statics/web/css/contact_guestbook.css" />
+<script type="text/javascript" src="statics/web/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="statics/web/js/byby.js"></script>
+<script type="text/javascript">
+function submitmsg() 
+{ 
+	var m=document.form_send;
+
+	if(m.IAM.value.length=="")
+	{
+		alert("请输入用户名");
+		m.IAM.focus();
+		return ;
+	}
+	if(m.themail.value.length=="")
+	{
+		alert("请输入邮箱");
+		m.themail.focus();
+		return ;
+	}
+    document.forms["form_send"].submit(); 
+};
+</script>
+</head>
+<body >
+<div id="main" >
+
+<div id="content">
+<div id="left_content">
+        <form id="form" name="form_send" method="post" action="?item=contact_guestbook&action=guestmsg">
+		<div id="top_content">
+			<div id="IAM">      <INPUT size=37 type="text" name="IAM" class="input"></div>
+			<div id="themail">  <INPUT size=37 type="text" name="themail" class="input"></div>
+			<div id="thecontent"><textarea rows=6 cols=55 name="thecontent" class="textarea"></textarea></div>
+			<a href="javascript:submitmsg()"><div id="submithot"></div></a>
+	    </div>
+        </form>
+		
+		<div id="real_content">
+            <ul>
+                 {load_data assign="list" table="Contact_GuestBook" where="" limit=3}
+
+                 {foreach from=$list item=rec}
+                <li><span class="name linetext" >{$rec.whoami}<br/>
+                    {$rec.content}
+                    <br/>
+                    <br/>
+                     {$rec.email}
+                     <br/>
+                      {$rec.createtime}
+			</span>
+			<img src="statics/web/images/contact_guestbook/contact_guestbook_line-1.png" />
+			</li>
+
+            {/foreach}
+
+			</ul>
+		</div>
+	</div>
+		{include file="menu.html"}
+
+</div>
+</div>
+
+<div id="bottom"><div id="bottomwrapper"> <div id="designlink" ></div></div> </div> 
+<body>
+</html>
+

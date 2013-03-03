@@ -1,0 +1,9 @@
+[02-Dec-2012 13:20:35] PHP Fatal error:  Call to private cls_crud::__construct() from invalid context in /home1/heyanerc/public_html/bybynew/framework/lib/Smarty/plugins/function.load_data.php on line 29
+[02-Dec-2012 13:20:56] PHP Fatal error:  Call to private cls_crud::__construct() from invalid context in /home1/heyanerc/public_html/bybynew/framework/lib/Smarty/plugins/function.load_data.php on line 29
+[02-Dec-2012 13:24:52] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home1/heyanerc/public_html/bybynew/framework/lib/Smarty/plugins/cls_crud.php on line 387
+[02-Dec-2012 13:27:59] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home1/heyanerc/public_html/bybynew/framework/lib/Smarty/plugins/cls_crud.php on line 387
+[02-Dec-2012 13:33:55] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home1/heyanerc/public_html/bybynew/framework/lib/Smarty/plugins/cls_crud.php on line 387
+[02-Dec-2012 13:36:14] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home1/heyanerc/public_html/bybynew/framework/lib/Smarty/plugins/cls_crud.php on line 387
+[02-Dec-2012 13:39:02] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home1/heyanerc/public_html/bybynew/framework/lib/Smarty/plugins/cls_crud.php on line 387
+[02-Dec-2012 13:39:10] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home1/heyanerc/public_html/bybynew/framework/lib/Smarty/plugins/cls_crud.php on line 387
+[02-Dec-2012 13:39:44] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home1/heyanerc/public_html/bybynew/framework/lib/Smarty/plugins/cls_crud.php on line 387

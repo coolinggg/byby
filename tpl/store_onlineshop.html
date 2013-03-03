@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>OnlineShop在线销售</title>
+<link rel="stylesheet" href="statics/web/css/reset.css" />
+<link rel="stylesheet" href="statics/web/css/global.css" />
+<link rel="stylesheet" href="statics/web/css/menu.css"/>
+<link rel="stylesheet" href="statics/web/css/store_onlineshop.css" />
+<script type="text/javascript" src="statics/web/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="statics/web/js/byby.js"></script>
+</head>
+<body >
+<img src="statics/web/images/store_onlineshop/line.png" style="display:none">
+
+<div id="main" >
+
+<div id="content">
+	<div id="left_content">
+		<div id="top_content">
+		  <a href="?item=store_onlineshop"><img id="logo" src="statics/web/images/store_onlineshop/store_onlineshop_title.png" /></a>
+		  
+
+	    </div>
+
+		<div id="real_content">
+		<div id="link">
+			<a href="?item=store_onlineshop"><span id="allcat">All The Products</span></a>
+			<ul>
+				{load_data assign="listcat" table="Store_OnlineStore_ProductCat" where="" limit=24}
+				{foreach from=$listcat item=cat}
+				<li><a href="?item=store_onlineshop&cat={$cat.id}"><span>{$cat.description}</span></a></li>
+				{/foreach}
+			</ul>
+		  </div>
+		  
+			<ul id="products">
+			{if isset($smarty.get.cat)}
+				{load_data assign="list" table="Store_OnlineStore" where="categry={$smarty.get.cat}" limit=24}
+			{else}
+				{load_data assign="list" table="Store_OnlineStore" where="" limit=24}
+			{/if}
+			
+			
+			{foreach from=$list item=rec}
+			<li><a href="?action=store_onlineshop_detail&theid={$rec.id}"><img src="upload/{$rec.theimage}"/></a>
+			<div class="disc">
+			<span>{$rec.thename}</span>
+			<span>CNY{$rec.price}</span>
+			</div>
+			</li>
+			{/foreach}
+			</ul>
+			
+
+		</div>
+	</div>
+			{include file="menu.html"}
+
+</div>
+</div>
+
+<div id="bottom"><div id="bottomwrapper"> <div id="designlink" ></div></div> </div> 
+<body>
+</html>
+

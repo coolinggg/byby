@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Design海报展示</title>
+<link rel="stylesheet" href="statics/web/css/reset.css" />
+<link rel="stylesheet" href="statics/web/css/global.css" />
+<link rel="stylesheet" href="statics/web/css/menu.css"/>
+<link rel="stylesheet" href="statics/web/css/designdetail.css" />
+<script type="text/javascript" src="statics/web/js/jquery-1.7.2.min.js"></script>
+
+<script type="text/javascript" src="statics/jquery-lightbox-0.5/js/jquery.lightbox-0.5.js"></script>
+<link rel="stylesheet" type="text/css" href="statics/jquery-lightbox-0.5/css/jquery.lightbox-0.5.css" media="screen" />
+<script type="text/javascript">
+$(function() {
+	$('a[rel*=lightbox]').lightBox(); // Select all links that contains lightbox in the attribute rel
+});
+</script>
+
+<script type="text/javascript" src="statics/web/js/byby.js"></script>
+</head>
+<body >
+<div id="main" >
+
+<div id="content">
+<div id="left_content">
+		<div id="top_content">
+			<div id="address">
+				<a id="shanghai" href="#" ><img src="statics/web/images/store_store_main/title1.png" alt="placeholder" /></a>
+			    <a id="lidu" href="#"     ><img src="statics/web/images/store_store_main/title2.png" alt="placeholder" /></a>
+			    <a id="gongti" href="#"   ><img src="statics/web/images/store_store_main/title3.png" alt="placeholder" /></a>
+			 </div>
+	    </div>
+
+		<div id="real_content">
+
+			<ul>
+			{load_data assign="list" table="Design_DesignDetail" where="theindex=$theindex" limit=12}
+			{foreach from=$list item=rec}
+			<li>
+			<div class="imgframe">
+			<div class="imgframeInner"> <a href="upload/{$rec.theimage}" rel="lightbox" ><img class="line" src="upload/{$rec.theimage}"/></a></div>
+			</div>
+			</li>
+			{/foreach}
+			</ul>
+
+
+		</div>
+	</div>
+	{include file="menu.html"}
+
+</div>
+
+</div>
+
+<div id="bottom"><div id="bottomwrapper"> <div id="designlink" ></div></div> </div> 
+
+<body>
+
+</html>
+

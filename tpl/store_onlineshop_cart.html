@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Cart购物车</title>
+<link rel="stylesheet" href="statics/web/css/reset.css" />
+<link rel="stylesheet" href="statics/web/css/global.css" />
+<link rel="stylesheet" href="statics/web/css/menu.css"/>
+<link rel="stylesheet" href="statics/web/css/cart.css"/>
+<link rel="stylesheet" href="statics/web/css/store_onlineshop_cart.css" />
+<script type="text/javascript" src="statics/web/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="statics/web/js/byby.js"></script>
+<script type="text/javascript">
+//改变购物车数量
+function cart_change(form_name, c_flag){
+form_name.ps_caid.value = c_flag;
+form_name.submit();
+}
+</script>
+</head>
+<body >
+<div id="main" >
+
+<div id="content">
+
+	<div id="left_content">
+		<div id="top_content">
+		   <a href="?item=store_onlineshop"><img id="logo" src="statics/web/images/store_onlineshop/store_onlineshop_title.png" /></a>
+		  <div id="link">
+		  </div>
+	    </div>
+
+		<div id="real_content">
+			
+			<div>
+			<form action="?action=mod_product_num" method="post" name="cart">
+		<input type="hidden" name="ps_caid" value="0">
+
+<table id="hor-minimalist-b" summary="Employee Pay Sheet">
+    <thead>
+    	<tr>
+            <th scope="col">名称</th>
+            <th scope="col">尺寸</th>
+            <th scope="col">价格(RMB)</th>
+			<th scope="col">数量</th>
+			<th scope="col">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+		 {foreach from=$goods key=k item=v}
+        <tr>
+			<td ><div class="productname"><a href="?action=store_onlineshop_detail&theid={$v.goodsID}" ><img id="goodimg" src="upload/{$v.theimage}"/></a><span class="goodsName">{$v.goodsName}</span></div></td>
+            <td>{$v.size}</td>
+
+            <td>￥{$v.price}</td>
+            <td>
+			<input type="hidden" value="{$v.size}" name="good_size[]">
+			<input type="text" name="goodsnum[]" maxlength="5" size="4" value="{$v.total_count}" /> 
+			<input type="hidden" value="{$v.goodsID}" name="good_uid[]">
+			<input type="button" onmouseover="this.style.cursor='hand'" onclick="javascript:cart_change(cart,'{$v.goodsID}')" value="修 改" /></td>
+			<td><a href="?action=cartdel&goodsid={$v.goodsID}&goodsize={$v.size}">删除</a></td>
+        </tr>
+		{/foreach}
+    </tbody>
+    <tfoot>
+        <tr>
+        <td colspan="5" >
+                合计(RMB)：{$totalprice}元
+            </td>
+        </tr>
+    </tfoot>
+</table>
+		</form>	
+
+			</div>	
+        <div style="text-align:center;padding-right:30px;margin-top:30px;">
+		<a style="margin-right:40px;" href="?item=store_onlineshop"><img id="cartimg" src="statics/web/images/store_onlineshop/shopping.png" alt="continue" /></a>
+		<a href="?item=store_onlineshop_order&action=order"><img id="cartimg" src="statics/web/images/store_onlineshop/order.png" alt="pay"          /></a>
+		</div>
+		</div>
+	</div>
+			{include file="menu.html"}
+
+</div>
+</div>
+
+<div id="bottom"><div id="bottomwrapper"> <div id="designlink" ></div></div> </div> 
+<body>
+</html>
+

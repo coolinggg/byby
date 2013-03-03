@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript" src="statics/new/jquery-1.4-and-jquery-ui-core-1.7.2.js"></script>
+
+<script type="text/javascript" src="statics/js/ajaxfileupload2.js"></script>
+
+    <script type="text/javascript">
+        function UploadFile( target)    
+        {
+alert("---");
+ $.ajaxFileUpload({
+        url:'framework/lib/util/doajaxfileupload.php?fileid='+target.name,
+        secureuri:false,
+        fileElementId:'' + target.name,
+        dataType: 'json',
+        success: function (data, status) {
+            if(typeof(data.error) != 'undefined')
+            {
+                if(data.error != '')
+                {
+                    alert(data.error);
+                }else{
+                    var msg= '成功上传文件：' + data.msg;
+                    $("#" + target.name.substr(0,target.name.length-10)).val(data.newfile);
+                    $("#" + target.name.substr(0,target.name.length-10) + "_img").attr("src", "upload/" + data.newfile);
+                    $("#" + target.name.substr(0,target.name.length-10) + "_img").show();
+                    //$("#imgFile").hide();
+                    alert(msg);
+                }
+            }
+        },
+        error: function (data, status, e)
+        {
+            alert(e);
+        }
+    });
+}
+        </script>
+<style type="text/css">
+    body{
+        font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+        font-size:12px;
+    }
+
+    p, h1, form, button { border:0; margin:0; padding:0; }
+    .spacer{ clear:both; height:1px; }
+    .myform{
+        margin:0 auto;
+        width:600px;
+        padding:14px;
+    }
+
+    #stylized{
+               /*background:#ebf4fb;*/
+    }
+
+    #stylized h1 {
+        font-size:14px;
+        font-weight:bold;
+        margin-bottom:8px;
+    }
+
+    #stylized p{
+        font-size:11px;
+        color:#666666;
+        margin-bottom:20px;
+        border-bottom:solid 1px #ccc;
+        padding-bottom:10px;
+    }
+
+    #stylized label{
+        display:block;
+        font-weight:bold;
+        text-align:right;
+        width:140px;
+        float:left;
+    }
+
+    #stylized .small{
+        color:#666666;
+        display:block;
+        font-size:11px;
+        font-weight:normal;
+        text-align:right;
+        width:140px;
+    }
+
+    #stylized input{
+        float:left;
+        font-size:12px;
+        padding:4px 2px;
+        border:solid 1px #ccc;
+        width:400px;
+        margin:2px 0 20px 10px;
+    }
+    #stylized input[type="file"]{
+        float:left;
+        font-size:12px;
+        padding:4px 2px;
+        border:solid 1px #ccc;
+        width:300px;
+        margin:2px 0 20px 10px;
+    }
+
+    #stylized button{
+        clear:both;
+        margin-left:150px;
+        width:75px;
+        height:31px;
+        background:#666666 url(img/button.png) no-repeat;
+        text-align:center;
+        line-height:31px;
+        color:#FFFFFF;
+        font-size:11px;
+        font-weight:bold;
+        }
+</style>
+</head>
+    <body>
+    <div id="stylized" class="myform">
+        
+           
+           {$testtable}
+           <button type="submit">增           加</button>
+           <div class="spacer"></div>
+
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Cart购物车</title>
+<link rel="stylesheet" href="statics/web/css/reset.css" />
+<link rel="stylesheet" href="statics/web/css/global.css" />
+<link rel="stylesheet" href="statics/web/css/menu.css"/>
+<link rel="stylesheet" href="statics/web/css/cart.css"/>
+<link rel="stylesheet" href="statics/web/css/store_onlineshop_order.css" />
+<script type="text/javascript" src="statics/web/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="statics/web/js/byby.js"></script>
+<script type="text/javascript" src="statics/web/js/initcity.js"></script>
+<script>
+function submitform() 
+{ 
+	var m=document.orderconfirm;
+
+	if(m.name.value=="我是 I AM")
+	{
+		alert("请输入我是 I AM");
+		m.name.focus();
+		return ;
+	}
+	if(m.email.value=="电子邮件 EMAIL")
+	{
+		alert("请输入电子邮件 EMAIL");
+		m.email.focus();
+		return ;
+	}
+	if(m.phone1.value=="联系电话 TEL")
+	{
+		alert("请输入联系电话 TEL");
+		m.phone1.focus();
+		return ;
+	}
+	if(m.phone2.value=="备用电话 TEL")
+	{
+		alert("请输入备用电话 TEL");
+		m.phone2.focus();
+		return ;
+	}
+	if(m.address.value=="详细地址")
+	{
+		alert("请输入详细地址");
+		m.address.focus();
+		return ;
+	}
+	if(m.province.selectedIndex==0)
+	{
+		alert("请选择省份");
+		m.province.focus();
+		return ;
+	}
+    document.forms["orderconfirm"].submit(); 
+};
+
+</script>
+</head>
+<body >
+<div id="main" >
+
+<div id="content">
+
+	<div id="left_content">
+		<div id="top_content">
+		   <a href="?item=store_onlineshop"><img id="logo" src="statics/web/images/store_onlineshop/store_onlineshop_title.png" /></a>
+		  <div id="link">
+		  </div>
+	    </div>
+
+		<div id="real_content">
+			        <div style="color:#fff;background:#6678B1;padding:5px;text-align:left;padding-right:20px;font-weight:normal;font-size:14px;margin-bottom:10px;">
+         订单信息：	
+	</div>
+			<div>
+
+<table id="hor-minimalist-b" summary="Employee Pay Sheet">
+    <thead>
+    	<tr>
+            <th scope="col">名称</th>
+            <th scope="col">尺寸</th>
+            <th scope="col">价格(RMB)</th>
+			<th scope="col">数量</th>
+        </tr>
+    </thead>
+    <tbody>
+		 {foreach from=$goods key=k item=v}
+        <tr>
+			<td ><div class="productname"><a href="?action=store_onlineshop_detail&theid={$v.goodsID}" ><img id="goodimg" src="upload/{$v.theimage}"/></a><span class="goodsName">{$v.goodsName}</span></div></td>
+            <td>{$v.size}</td>
+            <td>￥{$v.price}</td>
+            <td>{$v.total_count}</td>
+        </tr>
+		{/foreach}
+    </tbody>
+    <tfoot>
+        <tr>
+        <td colspan="5" >
+                合计(RMB)：{$totalprice}元
+            </td>
+        </tr>
+    </tfoot>
+</table>
+		</form>	
+
+			</div>	
+        <div style="color:#fff;text-align:left;padding-right:20px;font-weight:normal;font-size:14px;background:#6678B1;padding:5px;">
+         填写个人信息：	
+	</div>
+	<div style="margin-top:10px;text-align:center;">
+	<form action="?action=orderconfirm" method="post" name="orderconfirm">
+	 <span style="display:inline-block;margin-right:70px;margin-left:50px;"> <input name="name" type="text" align="absmiddle" style="text-align:center;width:200px; height:25px" onblur="if ( value=='') { value='我是 I AM' }" onfocus="if( value=='我是 I AM') { value=''}" value="我是 I AM"> </span>
+	 <span style="display:inline-block;"> <input name="email" type="text" align="absmiddle" style="text-align:center;width:200px; height:25px" onblur="if ( value=='') { value='电子邮件 EMAIL' }" onfocus="if( value=='电子邮件 EMAIL') { value=''}" value="电子邮件 EMAIL"> </span>
+	  <span style="display:inline-block;margin-right:70px;margin-top:10px;margin-left:50px;"> <input name="phone1" type="text" align="absmiddle" style="text-align:center;width:200px; height:25px" onblur="if ( value=='') { value='联系电话 TEL' }" onfocus="if( value=='联系电话 TEL') { value=''}" value="联系电话 TEL"> </span>
+	   <span style="display:inline-block;margin-top:10px;"> <input name="phone2" type="text" align="absmiddle" style="text-align:center;width:200px; height:25px" onblur="if ( value=='') { value='备用电话 TEL' }" onfocus="if( value=='备用电话 TEL') { value=''}" value="备用电话 TEL"> </span>
+	<span style="display:inline-block;margin-right:70px;margin-left:40px;">
+	<select id="province" class="borderB" style="margin-left:50px;;margin-top:7px;width:80px; height:25px;line-height:20px;" name="province" onchange="initcity();">
+	<script>
+      creatprovince('');
+    </script>
+	</select>
+    <select id="city" class="borderB" style="width:80px; height:25px;line-height:20px;" name="city">
+	<script>
+       initcity('');
+    </script>
+	<option value=""></option>
+	</select>
+		</span>
+	   <span style="display:inline-block;margin-top:10px;"> <input name="address" type="text" align="absmiddle" style="text-align:center;width:200px; height:25px" onblur="if ( value=='') { value='详细地址' }" onfocus="if( value=='详细地址') { value=''}" value="详细地址"> </span>
+		   
+	</br>
+	<span style="text-align:left;margin-top:20px;display:block;line-height:25px; ">
+ {load_data assign="list" table="Store_OnlineStore_Config" where="" limit=1} 
+ {$list[0].deliverinfo}
+<br></span>
+	<a style="display:inline-block;margin-top:20px;margin-left:50px;" href="javascript: submitform()" ><img src="statics/web/images/store_onlineshop/order.png"> </a>
+	</form>
+	</div>
+		</div>
+	</div>
+			{include file="menu.html"}
+
+</div>
+</div>
+
+<div id="bottom"><div id="bottomwrapper"> <div id="designlink" ></div></div> </div> 
+<body>
+</html>
+

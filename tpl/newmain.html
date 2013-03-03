@@ -1,0 +1,187 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type">
+
+<title>不言不语后台管理</title>
+<meta content="14700367776333526375" property="qc:admins">
+<meta content="" name="description">
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible">
+<link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="statics/css/new_adminmvm.css" type="text/css" rel="stylesheet">
+<link href="statics/css/new2_corly.css" rel="stylesheet">
+<script language="javascript" src="statics/js/jquery.min.js"></script>
+<style charset="utf-8" type="text/css">
+label input{
+    display: inline-block;
+}
+#addform input,#addform input[type="file"]{
+float:left;
+font-size:12px;
+
+border:solid 1px #ccc;
+width:300px;
+ margin-top: 9px;
+height: 24px;
+} 
+</style>
+
+
+<script type="text/javascript">  
+    function checkAll() {  
+        var m = document.getElementsByName("chkall")[0];  
+        var s = document.getElementsByName("check");  
+  
+        if (m.checked) {  
+  
+            for ( var i = 0; i < s.length; i++) {  
+                s[i].checked = true;  
+            }  
+        } else {  
+            for ( var i = 0; i < s.length; i++) {  
+                s[i].checked = false;  
+            }  
+  
+        }  
+    }  
+      function test() {  
+          var s = document.getElementsByName("check");
+        var msg="-1" ;
+            for ( var i = 0; i < s.length; i++) {  
+                if( s[i].checked)
+                { 
+				    msg +=",";
+                    msg += s[ i ].value;
+                }
+            }
+			if(msg == "-1")
+			{
+				alert("您一个也没有选择。");
+			}
+            else
+			{
+			  if(confirm("确认全部删除？"))
+			  {
+			    document.location='framework/lib/quickadm/quickadm_crud.php?q=3&fk=id&oper=del&id=' + msg + '&tn=' + '{$currtablename}' +'&tableid=' + {$tableid}; 
+			  }
+			}
+        }  
+    </script>
+	
+<script type="text/javascript">
+$(function(){
+
+$("#delall").click(function(e){
+
+	test();
+
+});
+});
+</script>
+
+
+<script type="text/javascript" src="statics/new/jquery-1.4-and-jquery-ui-core-1.7.2.js"></script>
+
+<script type="text/javascript" src="statics/js/ajaxfileupload2.js"></script>
+
+    <script type="text/javascript">
+        function UploadFile( target)    
+        {
+alert("---");
+ $.ajaxFileUpload({
+        url:'framework/lib/util/doajaxfileupload.php?fileid='+target.name,
+        secureuri:false,
+        fileElementId:'' + target.name,
+        dataType: 'json',
+        success: function (data, status) {
+            if(typeof(data.error) != 'undefined')
+            {
+                if(data.error != '')
+                {
+                    alert(data.error);
+                }else{
+                    var msg= '成功上传文件：' + data.msg;
+                    $("#" + target.name.substr(0,target.name.length-10)).val(data.newfile);
+                    $("#" + target.name.substr(0,target.name.length-10) + "_img").attr("src", "upload/" + data.newfile);
+                    $("#" + target.name.substr(0,target.name.length-10) + "_img").show();
+                    //$("#imgFile").hide();
+                    alert(msg);
+                }
+            }
+        },
+        error: function (data, status, e)
+        {
+            alert(e);
+        }
+    });
+}
+        </script>
+</head>
+<body style="background-color:#fff;">
+<div class="row" style="border-bottom:3px solid #888888;">
+<div class="span2" id="headerleft" style="float:left;padding-top:5px;">
+<h1><img style="width:146px;margin-left:15px;" src="statics/new/images/logo.bmp"></h1>
+</div>
+<div class="span12" id="headerleft" style="float:left;width:80%; ">
+<div id="titlemsg" style="margin-top:10px;text-align:right;">
+当日总额:<span>￥35000.00</span>| 当日结算额:<span>￥35000.00</span>| 当日订单:<span>2</span>张定单 | 当日结单:<span>2</span>张定单 &nbsp;<a target="_parent" href="logging.php?action=logout">[退出]</a>
+<a target="_blank" href=".">[打开主页]</a>
+</div>
+<div id="header_menu" style="margin-top:15px">
+     	<ul style="margin:0 0 0px 10px">
+		{foreach from=$categry key=k item=v}
+<li>
+<span><a href="?module=admin&action=subadmin&tableid={$things[$v][0].id}&currcat={$v}" onclick="sethighlight(0); togglemenu('1'); return false;">{$v}</a></span> 
+</li>
+{/foreach}
+</ul>    
+ 	</div>
+	<div style="clear:both"></div>
+
+</div>
+
+</div>
+<div class="container">
+<div class="row" style="margin:auto;width:auto;">
+<div class="span2" style="background-color:#ffffff; margin-left:10px;">
+<div id="left">
+	<div style="margin-top:0px;" id="17">
+	 
+		<dl>
+			<dt>{$currcat}</dt>
+			        {foreach from=$things[$currcat]  item=thething}
+					<dd><a href="?module=admin&action=subadmin&tableid={$thething.id}&currcat={$currcat}">{$thething.thethings}</a></dd>
+					{/foreach}
+	       		</dl>
+		</div>
+	
+</div>
+</div>
+<div class="span12" style="background-color:#ffffff;margin-top:0px;width:80%;" >
+
+<div style="clear:both"></div>
+<div class="content" style="background-color:#ffffff;margin-top:0px;">
+
+<div id="right">
+	<div style="margin-bottom:5px;font-weight:bold;border:1px solid #888888;margin-right:0px;padding:0px;background:none repeat scroll 0 0 #1A94C9">
+	<span style="line-height:22px;background:none repeat scroll 0 0 #1A94C9;color:#ffffff">当前位置：{$level1}/{$level2}</span>
+	<span> </span>
+	</div>
+{$testtable}
+</div>
+
+</div>
+
+<div class="line"></div>
+<footer>2012-2013 heyaner.com</footer>
+
+</div>
+</div>
+</div>
+<div class="container">
+
+</div>
+</body>
+</html>
+

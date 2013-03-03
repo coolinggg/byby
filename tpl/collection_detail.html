@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Collection藏品展示</title>
+<link rel="stylesheet" href="statics/web/css/reset.css" />
+<link rel="stylesheet" href="statics/web/css/global.css" />
+<link rel="stylesheet" href="statics/web/css/menu.css"/>
+<link rel="stylesheet" href="statics/web/css/collection_detail.css" />
+<script type="text/javascript" src="statics/web/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="statics/web/js/byby.js"></script>
+<script type="text/javascript" src="statics/web/js/collection_detail.js"></script>
+
+<script type="text/javascript" src="statics/jquery-lightbox-0.5/js/jquery.lightbox-0.5.js"></script>
+<link rel="stylesheet" type="text/css" href="statics/jquery-lightbox-0.5/css/jquery.lightbox-0.5.css" media="screen" />
+<script type="text/javascript">
+$(function() {
+	$('a[rel*=lightbox]').lightBox(); // Select all links that contains lightbox in the attribute rel
+});
+</script>
+
+</head>
+<body >
+<div id="main" >
+
+<div id="content">
+<div id="left_content">
+		<div id="top_content">
+		
+
+	    </div>
+
+		<div id="real_content">
+		<div id="link">
+			<a href="?item=collection"><span id="allcat">All The Products</span></a>
+			<ul>
+				{load_data assign="listcat" table="Museum_Collection_ProductCat" where="" limit=24}
+				{foreach from=$listcat item=cat}
+				<li><a href="?item=collection&cat={$cat.id}"><span>{$cat.description}</span></a></li>
+				{/foreach}
+			</ul>
+		  </div>
+		{load_data assign="list" table="Museum_Collection" where="id={$theid}" limit=1}
+		{load_data assign="list2" table="Museum_Collection_Detail" where="theindex='{$list[0].theindex}'" limit=1}
+			<div id="products">
+				<div id="productleft"><a id="bigimghref" href="upload/{$list[0].theimage}" rel="lightbox" ><img id="bigimg" src="upload/{$list[0].theimage}"/></a></div>
+				<div id="productmiddle"><div id="wrapper">
+											   <img class="smallimg" src="upload/{$list[0].theimage}"/>
+				{if $list2[0].theimage1 neq ""}<img class ="smallimg" src="upload/{$list2[0].theimage1}"/>{/if}
+				{if $list2[0].theimage2 neq ""}<img class ="smallimg" src="upload/{$list2[0].theimage2}"/>{/if}
+				{if $list2[0].theimage3 neq ""}<img class ="smallimg" src="upload/{$list2[0].theimage3}"/>{/if}
+				{if $list2[0].theimage4 neq ""}<img class ="smallimg" src="upload/{$list2[0].theimage4}"/>{/if}
+				</div></div>
+				<div id="productright">
+				    <div>
+				    <span class="pnspan"><<a href="?action=collection_detail&theid={$idpre}">previous</a> | <a href="?action=collection_detail&theid={$idafter}">next</a>></span>
+					<span class="namespan">{$list[0].thename}</span>
+					<span class="pricespan" id="money">价格PRICE<span class="price">{$list[0].price}</span>RMB</span>
+					<span class="sn">SN:{$list[0].theindex}</span>
+					<span class="descspan">描述:</span>
+					<div class="detaildesc">
+					{$list[0].description}
+					</div>
+					<div id="thesize">
+					尺寸：</br>
+					<div class="detaildesc">
+					{if $list2[0].size1 neq ""}
+					{load_data assign="size1" table="Museum_Collection_ProductSize" where="id={$list2[0].size1}" limit=1}
+					{if count($size1) neq 0}
+					{if $size1[0].thesize neq '--'}
+					<a href="#"><span>{$size1[0].thesize}</span></a>{/if}{/if}{/if}
+					
+					{if $list2[0].size2 neq ""}
+					{load_data assign="size2" table="Museum_Collection_ProductSize" where="id={$list2[0].size2}" limit=1}
+					{if count($size2) neq 0} 
+					{if $size2[0].thesize neq '--'}
+					<a href="#"><span>{$size2[0].thesize}</span></a>{/if}{/if}{/if}
+					
+					{if $list2[0].size3 neq ""}
+					{load_data assign="size3" table="Museum_Collection_ProductSize" where="id={$list2[0].size3}" limit=1}
+					{if count($size3) neq 0} 
+					{if $size3[0].thesize neq '--'}
+					<a href="#"><span>{$size3[0].thesize}</span></a>{/if}{/if}{/if}
+					
+					{if $list2[0].size4 neq ""}
+					{load_data assign="size4" table="Museum_Collection_ProductSize" where="id={$list2[0].size4}" limit=1}
+					{if count($size4) neq 0}
+					{if $size4[0].thesize neq '--'}
+					<a href="#"><span>{$size4[0].thesize}</span></a>{/if}{/if}{/if}
+					</div>
+					</div>
+					
+					<div id="otherdesc">
+					其他：</br>
+					<div class="detaildesc">
+					{$list2[0].otherdesc}
+					</div>
+					</div>
+				    <div id="option">
+					Composition and care
+					</div>
+					<div id="themention" style="display:none;">
+					<p id="mention">
+					{$list2[0].caremention}
+					
+					</p>
+					</div>
+					</div>
+					<div id="share">
+					<ul>
+						<li><a title="Facebook" class="facebook"></a></li>
+						<li><a title="Twitter" class="twitter"></a></li>
+						<li><a target="_blank" class="pinterest-link"></a></li>
+						<li><a class="print-link"></a></li>
+					</ul>
+					</div>
+					<div id="addtocartdiv" style="display:none;">
+					  <span>已经添加到购物车.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	{include file="menu.html"}
+
+</div>
+</div>
+
+<div id="bottom"><div id="bottomwrapper"> <div id="designlink" ></div></div> </div> 
+<body>
+</html>
+

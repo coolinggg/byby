@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Store实体店铺</title>
+<link rel="stylesheet" href="statics/web/css/reset.css" />
+<link rel="stylesheet" href="statics/web/css/global.css" />
+<link rel="stylesheet" href="statics/web/css/menu.css"/>
+<link rel="stylesheet" href="statics/web/css/store_store_main.css" />
+<script type="text/javascript" src="statics/web/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="statics/web/js/byby.js"></script>
+
+</head>
+<body >
+<img src="statics/web/images/title1_1.png" style="display:none">
+<img src="statics/web/images/title2_1.png" style="display:none">
+<img src="statics/web/images/title3_1.png" style="display:none">
+<div id="main" >
+			    {load_data assign="list" table="Store_Store" where="" limit=4}
+<div id="content">
+	<div id="left_content">
+		<div id="top_content">
+			<div id="title">
+		      <img src="statics/web/images/store_store_main/store_store_1000_title2.png" alt="placeholder" />
+			</div>
+			<div id="address">
+				{assign var='len' value=$list|@count}
+				<a id="shanghai" href={if $len >0 }"?action=store_store_detail&theid={$list[0].id}"{else}"#"{/if}
+				> <img src="statics/web/images/store_store_main/title1.png" alt="placeholder" /></a>
+			    <a id="lidu" href={if $len >1}"?action=store_store_detail&theid={$list[1].id}"{else}"#"{/if}
+				> <img src="statics/web/images/store_store_main/title2.png" alt="placeholder" /></a>
+			    <a id="gongti" href={if $len >2}"?action=store_store_detail&theid={$list[2].id}"{else}"#"{/if}
+				> <img src="statics/web/images/store_store_main/title3.png" alt="placeholder" /></a>
+				
+			 </div>
+	    </div>
+
+		<div id="real_content">
+			<ul id="goods">
+
+			{foreach from=$list item=rec}
+			<li>
+
+				<div class="pic">
+					<a href="?action=store_store_detail&theid={$rec.id}"><img src="upload/{$rec.theimage}" alt="placeholder" /></a>
+						<div class="desc" >
+							<h5>{$rec.description}</h5>
+							<h4>{$rec.address1}</h4>
+						</div>
+						<div class="time_small" ></div>
+				</div>
+				{$rec.address2}
+                				
+			</li>
+			{/foreach}
+			
+			
+			</ul>
+			
+
+		</div>
+	</div>
+		
+{include file="menu.html"}
+
+</div>
+</div>
+
+<div id="bottom"><div id="bottomwrapper"> <div id="designlink" ></div></div> </div> 
+<body>
+</html>
+

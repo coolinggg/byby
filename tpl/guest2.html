@@ -1,0 +1,87 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type">
+	<meta contents="text/html; charset=utf-8" http-equiv="contents-Type">
+	<title>心声社区</title>
+<meta content="心声社区" name="description">
+<meta content="心声社区" name="keywords">
+
+<script type="text/javascript" src="statics/new/jquery-1.4-and-jquery-ui-core-1.7.2.js"></script>
+
+
+	 <link href="statics/css/style.css" rel="stylesheet">
+	<style type="text/css">
+						*{
+						margin:0;
+						padding:0;
+						
+						}
+						
+					body{
+					     font-family:微软雅黑;
+						width:1000px;
+						margin:10px auto;
+						font-size:12px;
+						}
+					a{
+					    color:#fff;
+						text-decoration:none;
+						}
+					ul{
+						list-style-type:none;
+						}
+					ul li {
+						float:left;
+						width:88px;
+						height:30px;
+						line-height:30px;
+						background:green;
+						border-right: 2px solid #fff;
+						text-align:center;
+						}
+					ul li ul li{
+						height:28px;
+						background:orange;
+					     border-top:2px solid #fff;
+						}
+					ul li a{
+						display:block;
+						width:90px;
+						height:30px;
+						}
+					
+					ul li a:hover{
+						background:#004000;
+						}
+					ul li ul{
+						visibility:hidden;
+						}
+					ul li:hover ul{
+						visibility:visible;
+						}
+						
+					</style>
+		</head>
+<body>
+<div>                         <ul>
+                              {foreach from=$categry key=k item=v}
+                              <li><a href="###">{$v}</a>
+                                  <ul>
+		                             {foreach from=$things[$v]  item=thething}
+                                     <li><a href="###">{$thething.thethings}</a></li>
+                                     {/foreach}
+                                 </ul>
+                                 {/foreach}
+                               </li>
+
+                           </ul>
+</div>
+<div style="clear:both;">
+</div>
+                            
+<div class="contents">
+{$testtable}
+</div>
+
+
+
+</body></html>
